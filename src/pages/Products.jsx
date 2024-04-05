@@ -2,14 +2,18 @@ import { Filters } from "../components/Filters";
 import { ProductsContainer } from "../components/ProductsContainer";
 import { PaginationContainer } from "../components/PaginationContainer";
 import { customFetch } from "../utils";
+
 const url = "/products";
 
 export const loader = async ({ request }) => {
-  const response = await customFetch(url);
-  console.log(response);
+  const params = Object.fromEntries([
+    ...new URL(request.url).searchParams.entries(),
+  ]);
+  // console.log(params);
+  const response = await customFetch(url, { params });
   const products = response.data.data;
   const meta = response.data.meta;
-  return { products, meta };
+  return { products, meta, params };
 };
 
 export const Products = () => {

@@ -3,7 +3,7 @@ import { formatPrice } from "../utils";
 export const FormRange = ({ label, name, size, price }) => {
   const step = 1000;
   const maxPrice = 100000;
-  const [selectedPrice, setSElectedPrice] = useState(maxPrice);
+  const [selectedPrice, setSElectedPrice] = useState(price || maxPrice);
   return (
     <>
       <div className="form-control">
