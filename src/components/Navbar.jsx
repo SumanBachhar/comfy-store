@@ -3,6 +3,7 @@ import { NavLinks } from "./NavLinks";
 import { BsCart3, BsMoonFill, BsSunFill } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const themes = {
   winter: "winter",
@@ -15,6 +16,7 @@ const getThemeFromLocalstorage = () => {
 
 export const Navbar = () => {
   const [theme, setTheme] = useState(getThemeFromLocalstorage);
+
   const handleTheme = () => {
     const { winter, dracula } = themes;
     const newTheme = theme === winter ? dracula : winter;
@@ -25,6 +27,8 @@ export const Navbar = () => {
   useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  const numItemsInCart = useSelector((state) => state.cartState.numItemsInCart);
 
   return (
     <>
@@ -73,7 +77,7 @@ export const Navbar = () => {
               <div className="indicator">
                 <BsCart3 className="h-6 w-6" />
                 <span className="badge badge-sm badge-primary indicator-item">
-                  0
+                  {numItemsInCart}
                 </span>
               </div>
             </NavLink>
