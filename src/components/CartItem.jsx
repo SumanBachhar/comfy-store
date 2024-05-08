@@ -7,6 +7,7 @@ export const CartItem = ({ cartItem }) => {
   const removeItemFromTheCart = () => {
     dispatch(removeCart({ cartID }));
   };
+
   const handleAmount = (e) => {
     dispatch(editItem({ cartID, amount: parseInt(e.target.value) }));
   };
